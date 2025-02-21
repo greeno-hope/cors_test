@@ -1,0 +1,4 @@
+
+# Override the CORS mappings
+cors:
+  allowed-origins: "http://localhost, http://10.255.200.53"

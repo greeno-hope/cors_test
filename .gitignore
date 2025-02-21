@@ -1,0 +1,10 @@
+MgCorsTest/target/
+MgCorsTest/.mvn/
+MgCorsTest/.idea/
+MgCorsTest/*.iml
+MgCorsTest/logs/
+MgCorsTest/*.log
+MgCorsTest/.env
+MgCorsTest/*.DS_Store
+MgCorsTest/node_modules/
+
