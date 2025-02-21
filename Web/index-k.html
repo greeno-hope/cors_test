@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST Controller Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+<h2>REST Controller Test Page</h2>
+
+<button class="btn btn-primary" onclick="sendGetRequest('/time')">Get Time</button>
+<button class="btn btn-primary" onclick="sendGetRequest('/message')">Get Message</button>
+
+<div class="mb-3 mt-3">
+    <label for="postData" class="form-label">Enter POST Data:</label>
+    <input type="text" id="postData" class="form-control" placeholder="Enter new message">
+</div>
+
+<button class="btn btn-success" onclick="sendPostRequest()">Send POST Request</button>
+
+<div class="mt-4">
+    <h4>Response:</h4>
+    <pre id="responseOutput" class="border p-3 bg-light"></pre>
+</div>
+
+<script>
+    const username = "admin";
+    const password = "password";
+    const baseUrl = "http://10.255.200.55:32666/api";
+    const headers = new Headers({
+        "Authorization": "Basic " + btoa(username + ":" + password),
+        "Content-Type": "application/json"
+    });
+
+    async function sendGetRequest(endpoint) {
+        const apiUrl = baseUrl + endpoint;
+        try {
+            const response = await fetch(apiUrl, { headers });
+            const data = await response.text();
+            document.getElementById("responseOutput").textContent = data;
+        } catch (error) {
+            document.getElementById("responseOutput").textContent = "Error: " + error;
+        }
+    }
+
+    async function sendPostRequest() {
+        const apiUrl = baseUrl + "/new";
+        const postData = document.getElementById("postData").value;
+        try {
+            const response = await fetch(apiUrl, {
+                method: "POST",
+                headers,
+                body: JSON.stringify(postData)
+            });
+            const data = await response.text();
+            document.getElementById("responseOutput").textContent = data;
+        } catch (error) {
+            document.getElementById("responseOutput").textContent = "Error: " + error;
+        }
+    }
+</script>
+</body>
+</html>
