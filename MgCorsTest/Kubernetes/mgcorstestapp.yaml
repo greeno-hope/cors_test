@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mgcorstestapp-deployment
+  labels:
+    app: mgcorstestapp
+spec:
+  replicas: 1  # Maintain 1 container
+  selector:
+    matchLabels:
+      app: mgcorstestapp
+  template:
+    metadata:
+      labels:
+        app: mgcorstestapp
+    spec:
+      containers:
+        - name: mgcorstestapp
+          image: hopemcsese/mgcorstestapp:latest  # Your Docker image
+          ports:
+            - containerPort: 8088  # Port exposed by the container
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mgcorstestapp-service
+  labels:
+    app: mgcorstestapp
+spec:
+  type: NodePort  # Expose the service through a NodePort
+  selector:
+    app: mgcorstestapp  # Match the labels in the Deployment
+  ports:
+    - protocol: TCP
+      port: 8088       # Port on the service
+      targetPort: 8088 # Port on the container
+      nodePort: 32666  # Fixed NodePort (must be in the range 30000-32767)
