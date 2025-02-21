@@ -30,6 +30,4 @@ public class CorsTestRestController {
         return "OK" + message;
     }
 
-
-
 }

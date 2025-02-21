@@ -20,6 +20,7 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedOrigins(allowedOrigins)                                         // Allow frontend origin
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")              // Allowed HTTP methods
                 .allowedHeaders("Content-Type", "Authorization", "X-Requested-With")    // Custom headers
+                .exposedHeaders("Authorization")                                        // Ensure Authorization header is exposed
                 .allowCredentials(true)                                                 // Allow cookies/authentication
                 .maxAge(3600);                                                          // Cache preflight response for 1 hour
     }

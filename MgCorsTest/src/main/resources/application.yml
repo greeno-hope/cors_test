@@ -3,10 +3,11 @@ spring:
     name: MgCorsTest
 
 server:
-  port: 8080
+  port: 8088
   address: 0.0.0.0
 
 cors:
-  allowed-origins: "http://localhost"
+  allowed-origins:
+    "http://localhost:63343, http://127.0.0.1:63343"
 
 
